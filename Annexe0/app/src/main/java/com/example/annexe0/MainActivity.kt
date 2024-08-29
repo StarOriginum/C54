@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     /*var memo: Button? = null
     var liste: ListView? = null*/
 
-    var i: Intent = Intent(this@MainActivity, AjouterActivity::class.java)
-    var j: Intent = Intent(this@MainActivity, ListeActivity::class.java)
+    //val i: Intent = Intent(this@MainActivity, AjouterActivity::class.java)
+    //val j: Intent = Intent(this@MainActivity, ListeActivity::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +45,13 @@ class MainActivity : AppCompatActivity() {
 
     inner class Ecouteur : View.OnClickListener {
         override fun onClick(v: View) {
-            if (v === ajouter) {
+            if (v == ajouter) {
+                val i = Intent(this@MainActivity, AjouterActivity::class.java)
                 startActivity(i)
-            } else if (v === afficher) {
+            } else if (v == afficher) {
+                val j = Intent(this@MainActivity, ListeActivity::class.java)
                 startActivity(j)
-            } else if (v === quitter) {
+            } else if (v == quitter) {
                 finish();
             }
         }
