@@ -13,6 +13,7 @@ import java.io.FileOutputStream
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.nio.Buffer
+import java.util.Scanner
 
 class MainActivity : AppCompatActivity() {
     lateinit var nbLignes: TextView
@@ -60,10 +61,9 @@ class MainActivity : AppCompatActivity() {
         val isw = InputStreamReader(fis)
         val br = BufferedReader(isw)
         br.use {
-            while(br.readLine() != null){
-            nbChar += br.readLine().length
+            br.forEachLine { s -> nbChar += s.length }
         }
-             }
+
         return nbChar
     }
 
@@ -86,6 +86,13 @@ class MainActivity : AppCompatActivity() {
         }
         br.close()
         return nbC
+    }
+
+    fun compterMots(){
+        val input: Scanner
+        var compteur = 0
+
+        input.use { x -> compteur += x.hasNext() }
     }
 
     fun ecrireText(texte: String){
