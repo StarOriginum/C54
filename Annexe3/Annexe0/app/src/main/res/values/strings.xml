@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Annexe0</string>
+    <string name="title_activity_ajouter">AjouterActivity</string>
+    <string name="Ajouter">Ajouter</string>
+    <string name="Afficher">Afficher</string>
+    <string name="Quitter">Quitter</string>
+    <string name="Memo">Ajouter un mémo</string>
+    <string name="Échéance">Échéance</string>
+    <string name="Date">Date</string>
+
+
+</resources>
