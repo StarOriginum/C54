@@ -48,21 +48,33 @@ class AjouterActivity : AppCompatActivity() {
         //ec = new Ecouteur();
     }
 
+    override fun onStop(){
+        super.onStop()
+        try {
+            // on veut serialiser la liste dans un fichier pour la récupérer quand on va
+            GestionMemos.getInstance(applicationContext).serialiserListe()
+        }
+        catch (e:Exception)
+        {
+            e.printStackTrace()
+        }
+    }
+
     inner class Ecouteur : View.OnClickListener, OnDateSetListener{
         override fun onClick(v: View?) {
 
             var texteMemo = memoTexte.text.toString()
             var dateEcheance = date.text.toString()
-            val gestionMemos = GestionMemos.getInstance()
+            val gestionMemos = GestionMemos.getInstance(applicationContext)
 
             if (v == echeance){
-                val d:DatePickerDialog = DatePickerDialog(this@AjouterActivity)
+                val d:DatePickerDialog = DatePickerDialog(applicationContext)
                 d.setOnDateSetListener(this)
                 d.show()
             }
             else
             {
-                GestionMemos.getInstance().ajouterMemos(Memo(texteMemo, dateChoisie))
+                GestionMemos.getInstance(applicationContext).ajouterMemos(Memo(texteMemo, dateChoisie))
                 finish() // pour revenir au menu principal
             }
 

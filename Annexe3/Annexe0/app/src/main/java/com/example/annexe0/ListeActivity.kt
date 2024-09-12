@@ -36,7 +36,7 @@ class ListeActivity : AppCompatActivity() {
     fun convertir():Vector<String>
     {
         var listeTexteMemos = Vector<String>()
-        var listeMemos = GestionMemos.getInstance().listeMemos
+        var listeMemos = GestionMemos.getInstance(applicationContext).listeMemos
         for (memo in listeMemos)
             listeTexteMemos.add(memo.memoTexte)
         return listeTexteMemos

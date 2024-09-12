@@ -34,7 +34,15 @@ class MainActivity : AppCompatActivity() {
         afficher = findViewById(R.id.btnAfficher)
         quitter = findViewById(R.id.btnQuitter)
 
+        try {
+            val ref = GestionMemos.getInstance(applicationContext)
+            val temp = ref.deserialiserListe()
+            ref.listeMemos = temp
+        } catch(e:Exception){
+            e.printStackTrace()
+        }
         val ec = Ecouteur() // Declaration du type facultatif
+
 
         val elementsEcouteurs = arrayOf<View?>(ajouter, afficher, quitter)
 
