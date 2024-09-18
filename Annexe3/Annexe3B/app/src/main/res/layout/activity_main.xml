@@ -7,13 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <SeekBar
+        android:id="@+id/seek1"
+        android:layout_width="399dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="183dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/seek2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <SeekBar
+        android:id="@+id/seek2"
+        android:layout_width="403dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seek1" />
+
+    <SeekBar
+        android:id="@+id/seek3"
+        android:layout_width="393dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="242dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seek2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
