@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.io.FileNotFoundException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
@@ -54,8 +55,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    data class infoDent1(val noDent1: String, val note1: String, val check1: Boolean) : Serializable
-    data class infoDent2(val noDent2: String, val note2: String, val check2: Boolean) : Serializable
+    data class infoDents(val noDent1: String, val note1: String, val check1: Boolean,
+                         val noDent2: String, val note2: String, val check2: Boolean) : Serializable
+
 
 
 
@@ -63,78 +65,65 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        val fos = openFileOutput("data.ser", MODE_PRIVATE)
-        val oos = ObjectOutputStream(fos)
-        oos.use {
-            it.writeObject(noDent1)
-            it.writeObject(noDent2)
-            it.writeObject(note1)
-            it.writeObject(note2)
-            it.writeObject(check1)
-            it.writeObject(check2)
-        }
+        saveDents()
+
 
     }
 
     override fun onResume() {
         super.onResume()
 
-        val fis = openFileInput("data.ser")
-        val ois = ObjectInputStream(fis)
-        ois.use{
-            noDent1 = it.readObject() as EditText
-            noDent2 = it.readObject() as EditText
-            note1 = it.readObject() as EditText
-            note2 = it.readObject() as EditText
-            check1 = it.readObject() as CheckBox
-            check2 = it.readObject() as CheckBox
-        }
+        loadDents()
 
     }
 
     override fun onPause() {
         super.onPause()
-        val fos = openFileOutput("data.ser", MODE_PRIVATE)
-        val oos = ObjectOutputStream(fos)
-        oos.use {
-            it.writeObject(dent1)
-            it.writeObject(dent2)
-            it.writeObject(note1)
-            it.writeObject(note2)
-            it.writeObject(check1)
-            it.writeObject(check2)
-        }
-    }
-
-    fun saveDent1(){
-        val infoDent1 = infoDent1(
-        noDent1.text.toString(),
-        note1.text.toString(),
-        check1.isChecked)
-
-        val fos = openFileOutput("data.ser", MODE_PRIVATE)
-        val oos = ObjectOutputStream(fos)
-        oos.use {
-            it.writeObject(infoDent1)
-        }
-
+        saveDents()
 
     }
 
-    fun saveDent2(){
-        val infoDent2 = infoDent2(
-        noDent2.text.toString(),
-        note2.text.toString(),
-        check2.isChecked
+
+    fun saveDents(){
+        val infoDents = infoDents(
+            noDent1.text.toString(),
+            note1.text.toString(),
+            check1.isChecked,
+            noDent2.text.toString(),
+            note2.text.toString(),
+            check2.isChecked
         )
 
         val fos = openFileOutput("data.ser", MODE_PRIVATE)
         val oos = ObjectOutputStream(fos)
         oos.use {
-            it.writeObject(infoDent2)
+            it.writeObject(infoDents)
         }
+    }
 
+    fun loadDents(){
+        try {
+            val fis = openFileInput("data.ser")
+            val ois = ObjectInputStream(fis)
+            val infoDents = ois.readObject() as infoDents
 
+            ois.use{
+                noDent1.setText(infoDents.noDent1)
+                note1.setText(infoDents.note1)
+                check1.isChecked = infoDents.check1
+
+                noDent2.setText(infoDents.noDent2)
+                note2.setText(infoDents.note2)
+                check2.isChecked = infoDents.check2
+            }
+        } catch(fnfe: FileNotFoundException)
+        {
+            fnfe.printStackTrace()
+        }
+        catch (e:Exception)
+        {
+            e.printStackTrace()
+        }
 
 
     }
