@@ -32,4 +32,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toEndOf="@+id/champClass2012" />
+
+    <TextView
+        android:id="@+id/texteDate"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="177dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
