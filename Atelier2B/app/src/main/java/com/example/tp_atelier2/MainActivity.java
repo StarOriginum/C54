@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     temp.put("nom", produit.getNom());
                     temp.put("prix", String.valueOf(produit.getPrix()));
                     vect.add(temp);
+
                 }
 
                 for (Hashtable<String, Object> item: vect){
