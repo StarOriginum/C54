@@ -26,7 +26,7 @@ public class AccessServeur implements Sujet {
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
-    public void fetchChansons(String url) {
+    public void fetchChansons() {
 
         handler.postDelayed(() -> {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {

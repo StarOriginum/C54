@@ -1,5 +1,6 @@
 package com.example.tp1_musique;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
@@ -18,12 +19,14 @@ import androidx.media3.common.Player;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
 
+import com.bumptech.glide.Glide;
+
 public class MainActivity extends AppCompatActivity implements ObservateurChangement {
 
     ExoPlayer exoPlayer;
     SeekBar seekBar;
     PlayerView vue;
-    ImageView playPauseButton, nextButton, prevButton;
+    ImageView playPauseButton, nextButton, prevButton, coverAlbums;
     TextView titreChanson;
     Handler handler = new Handler();
     Runnable miseAJourSeekBar;
@@ -46,14 +49,18 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
 
         });
 
+        listeChansons = new ListeChansons();
+
+        vue = new PlayerView(this);
+
         vue.setUseController(false);
 
 
-        /*seekBar = findViewById(R.id.seekBar);
-        playPauseButton = findViewById(R.id.playPauseButton);
+        seekBar = findViewById(R.id.seekBar);
+        playPauseButton = findViewById(R.id.PlayPauseButton);
         nextButton = findViewById(R.id.nextButton);
         prevButton = findViewById(R.id.prevButton);
-        titreChanson = findViewById(R.id.titleTextView);*/
+        titreChanson = findViewById(R.id.titreChanson);
 
         exoPlayer = new ExoPlayer.Builder(this).build();
         exoPlayer.addListener(new Player.Listener() {
@@ -67,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
         });
 
         accessServeur = new AccessServeur(this);
+        accessServeur.fetchChansons();
         accessServeur.ajouterObservateur(this);
 
         setUpSeekBar();
@@ -84,8 +92,15 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
     }
 
     public void setUpSong(int index){
-        if (index >= 0 && index < listeChansons.getMusic().size()){
+        if (listeChansons.getMusic() != null && index >= 0 && index < listeChansons.getMusic().size()){
             Chansons song = listeChansons.getMusic().get(index);
+
+            coverAlbums = findViewById(R.id.coverAlbums);
+            Glide.with(this)
+                    .load((song.getImage()))
+                    .into(coverAlbums);
+
+            titreChanson.setText(song.getTitle());
 
             MediaItem mediaItem = MediaItem.fromUri(song.getSource());
             exoPlayer.setMediaItem(mediaItem);
@@ -121,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
     public void togglePlayPause(){
         if (exoPlayer.isPlaying()){
             exoPlayer.pause();
+
             stopSeekBarUpdate();
         }
         else{
