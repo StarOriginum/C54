@@ -14,6 +14,7 @@ import android.os.Looper;
 
 public class AccessServeur implements Sujet {
 
+
     private final String url = "https://api.npoint.io/d4c29479e010376e6847";
     private final Gson gson = new Gson();
 
@@ -24,11 +25,11 @@ public class AccessServeur implements Sujet {
 
     public AccessServeur(Context context){
         this.requestQueue = Volley.newRequestQueue(context);
+
     }
 
     public void fetchChansons() {
 
-        handler.postDelayed(() -> {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
                 lp = gson.fromJson(response, ListeChansons.class);
 
@@ -46,7 +47,7 @@ public class AccessServeur implements Sujet {
             });
 
             requestQueue.add(stringRequest);
-        }, 5000);
+
 
     }
 
@@ -58,7 +59,7 @@ public class AccessServeur implements Sujet {
 
     @Override
     public void enleverObservateur(ObservateurChangement obs) {
-        obs = null;
+        this.obs = null;
 
     }
 

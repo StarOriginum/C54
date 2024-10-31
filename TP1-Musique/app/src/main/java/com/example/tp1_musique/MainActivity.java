@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
 
 
         });
-
+        accessServeur = new AccessServeur(this);
         listeChansons = new ListeChansons();
 
         vue = new PlayerView(this);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
 
         });
 
-        accessServeur = new AccessServeur(this);
+
         accessServeur.fetchChansons();
         accessServeur.ajouterObservateur(this);
 
@@ -105,10 +105,22 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
             MediaItem mediaItem = MediaItem.fromUri(song.getSource());
             exoPlayer.setMediaItem(mediaItem);
             exoPlayer.prepare();
+            playPauseButton.setImageResource(android.R.drawable.ic_media_play);
+
+            exoPlayer.addListener(new Player.Listener() {
+                @Override
+                public void onPlaybackStateChanged(int playbackState) {
+                    if (playbackState == Player.STATE_READY) {
+                        seekBar.setMax((int) exoPlayer.getDuration());
+                    }
+                    else if (playbackState == Player.STATE_ENDED) {
+                        skipToNextSong();
+                    }
+                }
+            });
             exoPlayer.play();
 
             titreChanson.setText(song.getTitle());
-            seekBar.setMax((int) song.getDuration());
 
             seekBar.setProgress(0);
 
@@ -136,11 +148,12 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
     public void togglePlayPause(){
         if (exoPlayer.isPlaying()){
             exoPlayer.pause();
-            playPauseButton.setImageResource(R.drawable.video_pause_button);
+            playPauseButton.setImageResource(android.R.drawable.ic_media_pause);
             stopSeekBarUpdate();
         }
         else{
             exoPlayer.play();
+            playPauseButton.setImageResource(android.R.drawable.ic_media_play);
             startSeekBarUpdate();
         }
     }
