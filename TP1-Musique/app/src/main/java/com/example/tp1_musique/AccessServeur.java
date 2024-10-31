@@ -14,7 +14,7 @@ import android.os.Looper;
 
 public class AccessServeur implements Sujet {
 
-    private final String url = "https://api.jsonbin.io/v3/b/661ab8b1acd3cb34a837f284?meta=false";
+    private final String url = "https://api.npoint.io/d4c29479e010376e6847";
     private final Gson gson = new Gson();
 
     private final RequestQueue requestQueue;
@@ -34,19 +34,19 @@ public class AccessServeur implements Sujet {
 
                 final Handler handler = new Handler();
 
-                handler.postDelayed(new Thread() {
+                handler.post(new Thread() {
                     @Override
                     public void run(){
                         avertirObservateurs();
                     }
-                }, 1000);
+                });
 
             }, error -> {
                 error.printStackTrace();
             });
 
             requestQueue.add(stringRequest);
-        }, 1000);
+        }, 5000);
 
     }
 

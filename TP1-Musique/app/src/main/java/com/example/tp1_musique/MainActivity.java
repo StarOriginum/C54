@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ObservateurChange
     public void togglePlayPause(){
         if (exoPlayer.isPlaying()){
             exoPlayer.pause();
-
+            playPauseButton.setImageResource(R.drawable.video_pause_button);
             stopSeekBarUpdate();
         }
         else{
