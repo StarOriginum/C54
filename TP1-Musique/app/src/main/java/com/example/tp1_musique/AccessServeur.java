@@ -10,12 +10,16 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import android.os.Handler;
 import android.os.Looper;
+import android.service.carrier.CarrierMessagingService;
+
+import java.util.Hashtable;
+import java.util.Vector;
 
 
 public class AccessServeur implements Sujet {
 
 
-    private final String url = "https://api.npoint.io/d4c29479e010376e6847";
+    private final String url = "https://api.jsonbin.io/v3/b/6723b430e41b4d34e44bfa92?meta=false";
     private final Gson gson = new Gson();
 
     private final RequestQueue requestQueue;
@@ -48,7 +52,27 @@ public class AccessServeur implements Sujet {
 
             requestQueue.add(stringRequest);
 
+    }
 
+    public Vector<Hashtable<String, Object>> getChansonsHashtable() {
+        Vector<Hashtable<String, Object>> songList = new Vector<>();
+
+        if (lp == null){
+            fetchChansons();
+        }
+
+        if (lp != null){
+            for (Chansons song: lp.getMusic()) {
+                Hashtable<String, Object> data = new Hashtable<>();
+
+                data.put("title", song.getTitle());
+                data.put("album", song.getAlbum());
+                data.put("artist", song.getArtist());
+                data.put("image", song.getImage());
+                songList.add(data);
+            }
+        }
+        return songList;
     }
 
 
@@ -68,7 +92,5 @@ public class AccessServeur implements Sujet {
         if (obs != null){
             obs.changement(lp);
         }
-
-
     }
 }

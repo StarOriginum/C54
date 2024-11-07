@@ -34,6 +34,22 @@
             android:text="Titre"
             android:textSize="18sp"
             android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/titreAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Album"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/titreArtiste"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Artiste"
+            android:textAlignment="center"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,17 +77,31 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".2"
             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnShuffle"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Shuffle: off" />
 
             <ImageButton
                 android:id="@+id/PlayPauseButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                 />
+                android:backgroundTint="#E6E6FA" />
+
+            <Button
+                android:id="@+id/btnRepeat"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Repeat: off" />
 
         </LinearLayout>
 
@@ -80,27 +110,42 @@
             android:layout_height="0dp"
             android:layout_weight=".2"
             android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/rewindButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:src="@android:drawable/ic_media_rew"
+                android:backgroundTint="#E6E6FA"
+
+                />
 
             <ImageButton
                 android:id="@+id/prevButton"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="2"
-                android:background="@drawable/previous_track"
-                app:srcCompat="@drawable/next_track_button" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
+                android:src="@android:drawable/ic_media_previous"
+                android:backgroundTint="#E6E6FA"/>
 
             <ImageButton
                 android:id="@+id/nextButton"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="2"
-                android:background="@drawable/next_track_button"
-                app:srcCompat="@drawable/next_track_button" />
+                android:src="@android:drawable/ic_media_next"
+                android:backgroundTint="#E6E6FA"/>
+
+            <ImageButton
+                android:id="@+id/forwardButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:src="@android:drawable/ic_media_ff"
+                android:backgroundTint="#E6E6FA"
+
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -110,27 +155,19 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/quitButton"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_weight="2"
-                android:background="@drawable/rewind_button"
+                android:backgroundTint="#E6E6FA"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
-                 />
-
-            <Space
-                android:layout_width="match_parent"
+            <SeekBar
+                android:id="@+id/volumeBar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3" />
+                android:layout_weight="1" />
 
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_weight="2"
-                android:background="@drawable/fast_forward_button"
-
-                />
         </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
