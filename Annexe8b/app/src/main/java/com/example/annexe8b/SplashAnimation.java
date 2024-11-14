@@ -38,15 +38,17 @@ public class SplashAnimation extends AppCompatActivity {
 
 
         x = ObjectAnimator.ofFloat(object, View.X, 500);
-        y = ObjectAnimator.ofFloat(object, View.Y, 500);
+        y = ObjectAnimator.ofFloat(object, View.Y, 1000);
         alpha = ObjectAnimator.ofFloat(soleil, View.ALPHA, 1);
         scaleX = ObjectAnimator.ofFloat(object, View.SCALE_X, 20);
         scaleY = ObjectAnimator.ofFloat(object, View.SCALE_Y, 20);
 
         AnimatorSet set = new AnimatorSet();
+        AnimatorSet setScale = new AnimatorSet();
+        setScale.playTogether(scaleX, scaleY);
         set.setDuration(1000);
-        set.playSequentially(x, y, alpha);
-        set.playTogether(scaleX, scaleY);
+        set.playSequentially(y, alpha, setScale);
+
 
         button.setOnClickListener(v-> set.start());
 

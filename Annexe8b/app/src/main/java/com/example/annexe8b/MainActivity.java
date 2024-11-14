@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         carsAnim = findViewById(R.id.button);
-        splashAnim = findViewById(R.id.button2);
-        titleAnim = findViewById(R.id.button3);
+        splashAnim = findViewById(R.id.button3);
+        titleAnim = findViewById(R.id.button2);
 
 
         carsAnim.setOnClickListener(v -> {
